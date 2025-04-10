@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from app.config import load_config
-from app.logger import logger
+from config import load_config
+from logger import logger
+from models.user import User
 
 config = load_config()
 app = FastAPI()
@@ -16,7 +17,7 @@ def read_root():
     return {"message": "Hello, World!"}
 
 
-@app.get("/custom")
+@app.post("/custom")
 def read_custom_message(num1: int) -> dict:
     return {"message": num1}
 
@@ -25,3 +26,12 @@ def read_custom_message(num1: int) -> dict:
 def get_db_info():
     logger.info(f"Connecting to database: {config.db.database_url}")
     return {"database_url": config.db.database_url}
+
+
+user_info_test = User(name="John Doe", id=1)
+
+
+@app.get("/user")
+def get_user_info():
+    print("zaxodet")
+    return {"message": "Hello, World!"}
