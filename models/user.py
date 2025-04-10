@@ -2,5 +2,6 @@ from pydantic import BaseModel
 
 
 class User(BaseModel):
+    age: int
     name: str
-    id: int
+    is_adult: bool = None
